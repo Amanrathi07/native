@@ -8,7 +8,6 @@ export default function Index() {
     >
     
     <Text>working</Text>
-    <Link href={"/about"}>about screen</Link>
     </View>
   );
 }
