@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import * as AsyncStorage from 'expo-secure-store';
 
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { View, Text } from 'react-native'
@@ -98,17 +98,28 @@ const TheamContext = createContext<undefined|TheamContextType>(undefined)
 export const TheamProvider = ({children}:{children:ReactNode})=>{
     const[isDarkMode,setIsDarkMode] = useState(false) ;
 
-    useEffect(()=>{
-        AsyncStorage.getItem("darkMode").then((value)=>{
-            if(value) setIsDarkMode(JSON.parse(value))
-        })
-    },[])
+    useEffect(() => {
+    const loadDarkMode = async () => {
+      try {
+        const value = await AsyncStorage.getItem("darkMode");
+        if (value !== null) setIsDarkMode(JSON.parse(value));
+      } catch (err) {
+        console.error("Failed to load dark mode from storage:", err);
+      }
+    };
 
-    const toggleDarkMode = async()=>{
-        const newMode = !isDarkMode ;
-        setIsDarkMode(newMode);
-        await AsyncStorage.setItem("darkMode",JSON.stringify(newMode))
+    loadDarkMode();
+  }, []);
+
+    const toggleDarkMode = async () => {
+    try {
+      const newMode = !isDarkMode;
+      setIsDarkMode(newMode);
+      await AsyncStorage.setItem("darkMode", JSON.stringify(newMode));
+    } catch (err) {
+      console.error("Failed to save dark mode to storage:", err);
     }
+  };
 
     const colors =isDarkMode ? darkColors : lightColors ;
 
