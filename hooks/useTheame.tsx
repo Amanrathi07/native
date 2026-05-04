@@ -1,7 +1,6 @@
 import * as AsyncStorage from 'expo-secure-store';
 
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { View, Text } from 'react-native'
 
 export interface ColorScheme {
   bg: string;
