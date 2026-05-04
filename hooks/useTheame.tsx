@@ -1,3 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage"
+
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { View, Text } from 'react-native'
 
 export interface ColorScheme {
@@ -84,9 +87,46 @@ const darkColors: ColorScheme = {
   statusBarStyle: "light-content" as const,
 };
 
+interface TheamContextType {
+    isDarkMode:boolean ;
+    toggleDarkMode :()=>void ;
+    colors:ColorScheme 
+}
+
+const TheamContext = createContext<undefined|TheamContextType>(undefined)
+
+export const TheamProvider = ({children}:{children:ReactNode})=>{
+    const[isDarkMode,setIsDarkMode] = useState(false) ;
+
+    useEffect(()=>{
+        AsyncStorage.getItem("darkMode").then((value)=>{
+            if(value) setIsDarkMode(JSON.parse(value))
+        })
+    },[])
+
+    const toggleDarkMode = async()=>{
+        const newMode = !isDarkMode ;
+        setIsDarkMode(newMode);
+        await AsyncStorage.setItem("darkMode",JSON.stringify(newMode))
+    }
+
+    const colors =isDarkMode ? darkColors : lightColors ;
+
+    return(
+        <TheamContext.Provider value={{isDarkMode ,toggleDarkMode , colors}}>
+            {children}
+        </TheamContext.Provider>
+    )
+}
 
 const useTheame = () => {
+    const context = useContext(TheamContext) ;
 
+    if(context ===undefined){
+        throw new Error("useTheam must be used within a theamProvider");
+    }
+
+    return context ;
 }
 
 export default useTheame
