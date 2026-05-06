@@ -59,4 +59,4 @@ export const clearAllTodos = mutation({
        
        return {deletedCount:todos.length}
     }
-})
+});
