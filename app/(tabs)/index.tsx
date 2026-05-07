@@ -2,38 +2,22 @@ import { createHomeStyles } from "@/assets/styles/home.styles";
 import { api } from "@/convex/_generated/api";
 import useTheame, { ColorScheme } from "@/hooks/useTheame";
 import { useMutation, useQuery } from "convex/react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
+import { StatusBar, Text } from "react-native";
 
 export default function Index() {
   const { toggleDarkMode, colors } = useTheame();
 
-  const todos = useQuery(api.todos.getTodos);
-  console.log(todos);
 
-  const addTodos = useMutation(api.todos.addTodos);
-  const style = createHomeStyles(colors)
+
+  const homeStyle = createHomeStyles(colors);
   return (
-    <View style={style.container}>
-      <Text>working</Text>
-      <TouchableOpacity onPress={toggleDarkMode}>
-        <Text>Togle Mode</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => addTodos({ text: "todo1" })}>
-        <Text>add todo</Text>
-      </TouchableOpacity>
-    </View>
+    <LinearGradient colors={colors.gradients.background} style={homeStyle.container}>
+      <StatusBar barStyle={colors.statusBarStyle} />
+      <SafeAreaView>
+        <Text>aman</Text>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
-
-const createStyle = (colors:ColorScheme) => {
-  const style = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      gap: 22,
-      backgroundColor:colors.bg ,
-    },
-  });
-  return style;
-};
