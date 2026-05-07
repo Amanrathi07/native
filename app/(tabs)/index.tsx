@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "convex/react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar, Text } from "react-native";
+import Header from "@/components/Header";
 
 export default function Index() {
   const { toggleDarkMode, colors } = useTheame();
@@ -16,7 +17,7 @@ export default function Index() {
     <LinearGradient colors={colors.gradients.background} style={homeStyle.container}>
       <StatusBar barStyle={colors.statusBarStyle} />
       <SafeAreaView>
-        <Text>aman</Text>
+        <Header />
       </SafeAreaView>
     </LinearGradient>
   );
