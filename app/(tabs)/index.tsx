@@ -1,3 +1,4 @@
+import { createHomeStyles } from "@/assets/styles/home.styles";
 import { api } from "@/convex/_generated/api";
 import useTheame, { ColorScheme } from "@/hooks/useTheame";
 import { useMutation, useQuery } from "convex/react";
@@ -10,7 +11,7 @@ export default function Index() {
   console.log(todos);
 
   const addTodos = useMutation(api.todos.addTodos);
-  const style = createStyle(colors)
+  const style = createHomeStyles(colors)
   return (
     <View style={style.container}>
       <Text>working</Text>
