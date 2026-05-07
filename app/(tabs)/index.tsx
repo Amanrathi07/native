@@ -18,7 +18,6 @@ export default function Index() {
       <TouchableOpacity onPress={toggleDarkMode}>
         <Text>Togle Mode</Text>
       </TouchableOpacity>
-
       <TouchableOpacity onPress={()=>addTodos({text:"todo1"})}>
         <Text>add todo</Text>
       </TouchableOpacity>
