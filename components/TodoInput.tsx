@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
 import useTheame from "@/hooks/useTheame";
 import { createHomeStyles } from "@/assets/styles/home.styles";
@@ -16,7 +16,16 @@ const TodoInput = () => {
 
   const addTodo = useMutation(api.todos.addTodos);
 
-  const handelAddTodo = async () => {};
+  const handelAddTodo = async () => {
+    if(newTodo.trim()){
+        try {
+            await addTodo({text:newTodo.trim()});
+            setNewTodo("")
+        } catch (error) {
+            Alert.alert("Error" , "failed to add todo ");
+        }
+    }
+  };
   return (
     <View style={homeStyle.inputSection}>
       <View style={homeStyle.inputWrapper}>
