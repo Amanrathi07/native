@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar, Text } from "react-native";
 import Header from "@/components/Header";
+import TodoInput from "@/components/TodoInput";
 
 export default function Index() {
   const { toggleDarkMode, colors } = useTheame();
@@ -18,6 +19,7 @@ export default function Index() {
       <StatusBar barStyle={colors.statusBarStyle} />
       <SafeAreaView>
         <Header />
+        <TodoInput />
       </SafeAreaView>
     </LinearGradient>
   );
