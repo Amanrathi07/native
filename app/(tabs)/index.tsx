@@ -26,6 +26,10 @@ export default function Index() {
   const todos = useQuery(api.todos.getTodos);
   const isLoading = todos === undefined;
 
+  const handelToggleTodo =(id : string)=>{
+
+  }
+
   if (isLoading) return <LoadingSpiner />;
 
   const renderTodoItem = ({ item }: { item: Todo }) => (
@@ -39,7 +43,7 @@ export default function Index() {
         <TouchableOpacity
           style={homeStyle.checkbox}
           activeOpacity={0.7}
-          onPress={() => console.log("todoPress")}
+          onPress={() => handelToggleTodo(item._id)}
         >
         <LinearGradient
         colors={item.isCompleted?colors.gradients.success:colors.gradients.muted}
