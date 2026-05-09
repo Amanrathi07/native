@@ -4,15 +4,17 @@ import useTheame, { ColorScheme } from "@/hooks/useTheame";
 import { useMutation, useQuery } from "convex/react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
-import { StatusBar, Text } from "react-native";
+import { FlatList, StatusBar, Text } from "react-native";
 import Header from "@/components/Header";
 import TodoInput from "@/components/TodoInput";
+import LoadingSpiner from "@/components/LoadingSpiner";
 
 export default function Index() {
   const { toggleDarkMode, colors } = useTheame();
-
-  
   const todos = useQuery(api.todos.getTodos)
+  const isLoading = todos === undefined ;
+
+  if(isLoading) return <LoadingSpiner />
 
   const homeStyle = createHomeStyles(colors);
   return (
@@ -21,9 +23,7 @@ export default function Index() {
       <SafeAreaView>
         <Header />
         <TodoInput />
-        {todos?.map((todo)=>(
-          <Text key={todo._id}>{todo.text}</Text>
-        ))}
+        
       </SafeAreaView>
     </LinearGradient>
   );
