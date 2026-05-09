@@ -59,6 +59,7 @@ export default function Index() {
         {item.isCompleted && <Ionicons name="checkmark" size={18} color={"#fff"} />} 
       </LinearGradient>
         </TouchableOpacity>
+        <Text>{item.text}</Text>
       </LinearGradient>
     </View>
   };
@@ -70,7 +71,7 @@ export default function Index() {
       style={homeStyle.container}
     >
       <StatusBar barStyle={colors.statusBarStyle} />
-      <SafeAreaView>
+      <SafeAreaView style={homeStyle.safeArea}>
         <Header />
         <TodoInput />
         <FlatList
