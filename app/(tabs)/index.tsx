@@ -4,26 +4,72 @@ import useTheame, { ColorScheme } from "@/hooks/useTheame";
 import { useMutation, useQuery } from "convex/react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
-import { FlatList, StatusBar, Text } from "react-native";
+import {
+  FlatList,
+  FlatListComponent,
+  StatusBar,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Header from "@/components/Header";
 import TodoInput from "@/components/TodoInput";
 import LoadingSpiner from "@/components/LoadingSpiner";
+import { Doc } from "@/convex/_generated/dataModel";
+import { Ionicons } from "@expo/vector-icons";
+
+type Todo = Doc<"todos">;
 
 export default function Index() {
   const { toggleDarkMode, colors } = useTheame();
-  const todos = useQuery(api.todos.getTodos)
-  const isLoading = todos === undefined ;
+  const todos = useQuery(api.todos.getTodos);
+  const isLoading = todos === undefined;
 
-  if(isLoading) return <LoadingSpiner />
+  if (isLoading) return <LoadingSpiner />;
+
+  const renderTodoItem = ({ item }: { item: Todo }) => (
+    <View style={homeStyle.todoItemWrapper}>
+      <LinearGradient
+        colors={colors.gradients.surface}
+        style={homeStyle.todoItem}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      >
+        <TouchableOpacity
+          style={homeStyle.checkbox}
+          activeOpacity={0.7}
+          onPress={() => console.log("todoPress")}
+        >
+        <LinearGradient
+        colors={item.isCompleted?colors.gradients.success:colors.gradients.muted}
+        style={[homeStyle.checkboxInner , {borderColor:item.isCompleted ? "transparent" : colors.border}]}
+       
+      >
+        {item.isCompleted && <Ionicons name="checkmark" size={18} color={"#fff"} />} 
+      </LinearGradient>
+        </TouchableOpacity>
+      </LinearGradient>
+    </View>
+  );
 
   const homeStyle = createHomeStyles(colors);
   return (
-    <LinearGradient colors={colors.gradients.background} style={homeStyle.container}>
+    <LinearGradient
+      colors={colors.gradients.background}
+      style={homeStyle.container}
+    >
       <StatusBar barStyle={colors.statusBarStyle} />
       <SafeAreaView>
         <Header />
         <TodoInput />
-        
+        <FlatList
+          data={todos}
+          renderItem={renderTodoItem}
+          keyExtractor={(item) => item._id}
+          style={homeStyle.todoList}
+          contentContainerStyle={homeStyle.todoListContent}
+        />
       </SafeAreaView>
     </LinearGradient>
   );
