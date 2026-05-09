@@ -38,8 +38,8 @@ export default function Index() {
 
   if (isLoading) return <LoadingSpiner />;
 
-  const renderTodoItem = ({ item }: { item: Todo }) => (
-    <View style={homeStyle.todoItemWrapper}>
+  const renderTodoItem = ({ item }: { item: Todo }) => {
+    return <View style={homeStyle.todoItemWrapper}>
       <LinearGradient
         colors={colors.gradients.surface}
         style={homeStyle.todoItem}
@@ -61,7 +61,7 @@ export default function Index() {
         </TouchableOpacity>
       </LinearGradient>
     </View>
-  );
+  };
 
   const homeStyle = createHomeStyles(colors);
   return (
@@ -80,6 +80,7 @@ export default function Index() {
           style={homeStyle.todoList}
           contentContainerStyle={homeStyle.todoListContent}
         />
+        
       </SafeAreaView>
     </LinearGradient>
   );
