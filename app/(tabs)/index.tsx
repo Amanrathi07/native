@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "convex/react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import {
+  Alert,
   FlatList,
   FlatListComponent,
   StatusBar,
@@ -16,7 +17,7 @@ import {
 import Header from "@/components/Header";
 import TodoInput from "@/components/TodoInput";
 import LoadingSpiner from "@/components/LoadingSpiner";
-import { Doc } from "@/convex/_generated/dataModel";
+import { Doc, Id } from "@/convex/_generated/dataModel";
 import { Ionicons } from "@expo/vector-icons";
 
 type Todo = Doc<"todos">;
@@ -25,9 +26,14 @@ export default function Index() {
   const { toggleDarkMode, colors } = useTheame();
   const todos = useQuery(api.todos.getTodos);
   const isLoading = todos === undefined;
-
-  const handelToggleTodo =(id : string)=>{
-
+  const toggelTodo = useMutation(api.todos.toggleTodo)
+  const handelToggleTodo = async (id : Id<"todos">)=>{
+    try {
+      await toggelTodo({id})
+    } catch (error) {
+      console.log("Error toggling todo " , error);
+      Alert.alert("Error" , "Failed to toogle todo");
+    }
   }
 
   if (isLoading) return <LoadingSpiner />;
