@@ -59,7 +59,9 @@ export default function Index() {
         {item.isCompleted && <Ionicons name="checkmark" size={18} color={"#fff"} />} 
       </LinearGradient>
         </TouchableOpacity>
-        <Text>{item.text}</Text>
+        <View>
+          <Text>{item.text}</Text>
+        </View>
       </LinearGradient>
     </View>
   };
