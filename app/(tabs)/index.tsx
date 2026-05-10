@@ -19,6 +19,7 @@ import TodoInput from "@/components/TodoInput";
 import LoadingSpiner from "@/components/LoadingSpiner";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { Ionicons } from "@expo/vector-icons";
+import EmptyState from "@/components/EmptyState";
 
 type Todo = Doc<"todos">;
 
@@ -124,7 +125,7 @@ export default function Index() {
           keyExtractor={(item) => item._id}
           style={homeStyle.todoList}
           contentContainerStyle={homeStyle.todoListContent}
-          ListEmptyComponent={}
+          ListEmptyComponent={<EmptyState />}
         />
       </SafeAreaView>
     </LinearGradient>
