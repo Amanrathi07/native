@@ -71,7 +71,7 @@ export default function Index() {
             </LinearGradient>
           </TouchableOpacity>
           <View style={homeStyle.todoTextContainer}>
-            <Text 
+            <Text
               style={[
                 homeStyle.todoText,
                 item.isCompleted && {
@@ -85,13 +85,19 @@ export default function Index() {
             </Text>
 
             <View style={homeStyle.todoActions}>
-              <TouchableOpacity onPress={()=>{}}>
-                <LinearGradient colors={colors.gradients.warning} style={homeStyle.actionButton}>
+              <TouchableOpacity onPress={() => {}}>
+                <LinearGradient
+                  colors={colors.gradients.warning}
+                  style={homeStyle.actionButton}
+                >
                   <Ionicons name="pencil" size={14} color={"#fff"} />
                 </LinearGradient>
               </TouchableOpacity>
-              <TouchableOpacity onPress={()=>{}}>
-                <LinearGradient colors={colors.gradients.danger} style={homeStyle.actionButton}>
+              <TouchableOpacity onPress={() => {}}>
+                <LinearGradient
+                  colors={colors.gradients.danger}
+                  style={homeStyle.actionButton}
+                >
                   <Ionicons name="trash" size={14} color={"#fff"} />
                 </LinearGradient>
               </TouchableOpacity>
@@ -118,6 +124,7 @@ export default function Index() {
           keyExtractor={(item) => item._id}
           style={homeStyle.todoList}
           contentContainerStyle={homeStyle.todoListContent}
+          ListEmptyComponent={}
         />
       </SafeAreaView>
     </LinearGradient>
