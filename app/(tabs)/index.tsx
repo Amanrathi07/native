@@ -36,10 +36,19 @@ export default function Index() {
       Alert.alert("Error", "Failed to toogle todo");
     }
   };
+  const todoDelete = useMutation(api.todos.deleteTodo);
 
-  const handelDelete = ()=>{
-
-  }
+  const handelDelete = async (id: Id<"todos">) => {
+    Alert.alert("Delte Todo", "Are you sure you want to delete this todo ?", [
+      { text: "Cancle", style: "cancel" },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: () => todoDelete({ id }),
+      },
+    ]);
+    todoDelete({ id });
+  };
 
   if (isLoading) return <LoadingSpiner />;
 
@@ -90,7 +99,7 @@ export default function Index() {
             </Text>
 
             <View style={homeStyle.todoActions}>
-              <TouchableOpacity onPress={() => handelEdit(item._id)}>
+              <TouchableOpacity onPress={() => {}}>
                 <LinearGradient
                   colors={colors.gradients.warning}
                   style={homeStyle.actionButton}
@@ -98,7 +107,7 @@ export default function Index() {
                   <Ionicons name="pencil" size={14} color={"#fff"} />
                 </LinearGradient>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() =>  handelDelete(item._id)}>
+              <TouchableOpacity onPress={() => handelDelete(item._id)}>
                 <LinearGradient
                   colors={colors.gradients.danger}
                   style={homeStyle.actionButton}
