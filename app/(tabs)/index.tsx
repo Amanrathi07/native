@@ -47,7 +47,6 @@ export default function Index() {
         onPress: () => todoDelete({ id }),
       },
     ]);
-    todoDelete({ id });
   };
 
   if (isLoading) return <LoadingSpiner />;
