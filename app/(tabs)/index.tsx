@@ -86,7 +86,7 @@ export default function Index() {
             </Text>
 
             <View style={homeStyle.todoActions}>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity onPress={() => handelEdit(item._id)}>
                 <LinearGradient
                   colors={colors.gradients.warning}
                   style={homeStyle.actionButton}
@@ -94,7 +94,7 @@ export default function Index() {
                   <Ionicons name="pencil" size={14} color={"#fff"} />
                 </LinearGradient>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity onPress={() =>  handelDelete(item._id)}>
                 <LinearGradient
                   colors={colors.gradients.danger}
                   style={homeStyle.actionButton}
