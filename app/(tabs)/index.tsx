@@ -10,6 +10,7 @@ import {
   FlatListComponent,
   StatusBar,
   Text,
+  TextInput,
   Touchable,
   TouchableOpacity,
   View,
@@ -20,10 +21,14 @@ import LoadingSpiner from "@/components/LoadingSpiner";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { Ionicons } from "@expo/vector-icons";
 import EmptyState from "@/components/EmptyState";
+import { useState } from "react";
 
 type Todo = Doc<"todos">;
 
 export default function Index() {
+  const [editingId,SetEditingId] = useState<Id<"todos">|null>(null)
+  const [editText,SetEditText] = useState("");
+
   const { toggleDarkMode, colors } = useTheame();
   const todos = useQuery(api.todos.getTodos);
   const isLoading = todos === undefined;
@@ -36,6 +41,29 @@ export default function Index() {
       Alert.alert("Error", "Failed to toogle todo");
     }
   };
+
+  const updateTodo = useMutation(api.todos.updateTodo)
+  const handelEditTodo = async(todo:Todo)=>{ 
+    SetEditText(todo.text);
+    SetEditingId(todo._id);
+  }
+  const handelSaveTodo = async(todo:Todo)=>{  
+    if(!editingId) return ;
+    try {
+      await updateTodo({id:editingId,text:editText.trim()})
+    } catch (error) {
+      console.log("Error updating todo",error);
+      Alert.alert("Error","Failed to update todo")
+    }finally{
+    SetEditText("");
+    SetEditingId(null);
+    }
+  }
+  const handelCancleTodo = async(todo:Todo)=>{  
+    SetEditText("");
+    SetEditingId(null);
+  }
+
   const todoDelete = useMutation(api.todos.deleteTodo);
 
   const handelDelete = async (id: Id<"todos">) => {
@@ -52,6 +80,7 @@ export default function Index() {
   if (isLoading) return <LoadingSpiner />;
 
   const renderTodoItem = ({ item }: { item: Todo }) => {
+  const isEditing = editingId ===item._id ;
     return (
       <View style={homeStyle.todoItemWrapper}>
         <LinearGradient
@@ -116,6 +145,29 @@ export default function Index() {
               </TouchableOpacity>
             </View>
           </View>
+          {isEditing?(
+            <View style={homeStyle.editContainer}>
+              <TextInput 
+                style={homeStyle.editInput}
+                value={editText}
+                onChangeText={SetEditText}
+                autoFocus
+                multiline
+                placeholder="Edit your todo..."
+                placeholderTextColor={colors.textMuted}
+/>
+            </View>
+          ):(
+            <View style={homeStyle.todoTextContainer}>
+              <Text 
+                style={[homeStyle.todoText,item.isCompleted && {textDecorationLine:"line-through" ,
+                  color:colors.textMuted,
+                  opacity:0.6
+                }]}>
+
+              </Text>
+            </View>
+          )}
         </LinearGradient>
       </View>
     );
