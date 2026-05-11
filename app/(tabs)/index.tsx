@@ -37,6 +37,10 @@ export default function Index() {
     }
   };
 
+  const handelDelete = ()=>{
+
+  }
+
   if (isLoading) return <LoadingSpiner />;
 
   const renderTodoItem = ({ item }: { item: Todo }) => {
