@@ -160,7 +160,7 @@ export default function Index() {
           ):(
             <View style={homeStyle.todoTextContainer}>
               <Text 
-                style={[homeStyle.todoText,item.isCompleted && {textDecorationLine:"line-through" ,
+                style={[homeStyle.todoText,item.isCompleted && {textDecorationLine:"line-through",
                   color:colors.textMuted,
                   opacity:0.6
                 }]}>
