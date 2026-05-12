@@ -156,10 +156,7 @@ export default function Index() {
 
                 {/* Cancel */}
                 <TouchableOpacity
-                  onPress={() => {
-                    SetEditingId(null);
-                    SetEditText("");
-                  }}
+                  onPress={() => handelCancleTodo}
                   activeOpacity={0.8}
                 >
                   <LinearGradient
