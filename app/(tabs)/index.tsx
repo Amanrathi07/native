@@ -1,17 +1,15 @@
 import { createHomeStyles } from "@/assets/styles/home.styles";
 import { api } from "@/convex/_generated/api";
-import useTheame, { ColorScheme } from "@/hooks/useTheame";
+import useTheame from "@/hooks/useTheame";
 import { useMutation, useQuery } from "convex/react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Alert,
   FlatList,
-  FlatListComponent,
   StatusBar,
   Text,
   TextInput,
-  Touchable,
   TouchableOpacity,
   View,
 } from "react-native";
