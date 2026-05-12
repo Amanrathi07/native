@@ -49,6 +49,9 @@ export default function Index() {
   };
   const handelSaveTodo = async () => {
     if (!editingId) return;
+    if(editText.trim()=='') {
+      return Alert.alert("Error", "provide some todo");
+    }
     try {
       await updateTodo({ id: editingId, text: editText.trim() });
     } catch (error) {
@@ -59,7 +62,7 @@ export default function Index() {
       SetEditingId(null);
     }
   };
-  const handelCancleTodo = async (todo: Todo) => {
+  const handelCancleTodo = () => {
     SetEditText("");
     SetEditingId(null);
   };
@@ -156,7 +159,7 @@ export default function Index() {
 
                 {/* Cancel */}
                 <TouchableOpacity
-                  onPress={() => handelCancleTodo}
+                  onPress={() => handelCancleTodo()}
                   activeOpacity={0.8}
                 >
                   <LinearGradient
