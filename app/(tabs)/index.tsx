@@ -80,7 +80,8 @@ export default function Index() {
   if (isLoading) return <LoadingSpiner />;
 
   const renderTodoItem = ({ item }: { item: Todo }) => {
-  const isEditing = editingId ===item._id ;
+  let isEditing = editingId ===item._id ;
+  console.log(editingId)
     return (
       <View style={homeStyle.todoItemWrapper}>
         <LinearGradient
