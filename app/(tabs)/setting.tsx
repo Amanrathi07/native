@@ -1,12 +1,15 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import useTheame from '@/hooks/useTheame'
+import { createSettingsStyles } from '@/assets/styles/setting.styles'
 
 const setting = () => {
-  const {isDarkMode} = useTheame()
   const [isAutoSync , setIsAutoSync] = useState(true)
   const [isNotificationEnable , setIsNotificationEnable] = useState(true)
+  
+  const {colors,isDarkMode,toggleDarkMode} = useTheame() ;
 
+  const settingTheam = createSettingsStyles(colors) ;
   return (
     <View style={style.container}>
       <Text>setting page</Text>

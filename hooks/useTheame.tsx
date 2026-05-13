@@ -132,7 +132,7 @@ export const TheamProvider = ({children}:{children:ReactNode})=>{
 const useTheame = () => {
     const context = useContext(TheamContext) ;
 
-    if(context ===undefined){
+    if(context === undefined){
         throw new Error("useTheam must be used within a theamProvider");
     }
 
