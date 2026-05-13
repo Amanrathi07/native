@@ -1,12 +1,73 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { createSettingsStyles } from "@/assets/styles/setting.styles";
+import { api } from "@/convex/_generated/api";
+import useTheame from "@/hooks/useTheame";
+import { Ionicons } from "@expo/vector-icons";
+import { useQuery } from "convex/react";
+import { LinearGradient } from "expo-linear-gradient";
+import { View, Text } from "react-native";
 
 const ProgressStats = () => {
-  return (
-    <View>
-      <Text>ProgressStats</Text>
-    </View>
-  )
-}
+  const { colors, isDarkMode, toggleDarkMode } = useTheame();
 
-export default ProgressStats
+  const settingStyles = createSettingsStyles(colors);
+
+  const todos = useQuery(api.todos.getTodos);
+  const totalTodos = todos ? todos.length : 0;
+  const completedTodos = todos
+    ? todos.filter((todo) => todo.isCompleted).length
+    : 0;
+
+  const activeTodos = totalTodos - completedTodos;
+  return (
+    <LinearGradient
+      colors={colors.gradients.surface}
+      style={settingStyles.section}
+    >
+      <Text style={settingStyles.sectionTitle}>Progress Stats</Text>
+
+      <View style={settingStyles.statsContainer}>
+        {/* Total Todos */}
+        <LinearGradient
+        colors={colors.gradients.background}
+        style={[settingStyles.statCard, { borderLeftColor: colors.primary }]}
+      >
+        <View style={settingStyles.statIconContainer}>
+          <LinearGradient
+            colors={colors.gradients.primary}
+            style={settingStyles.statIcon}
+          >
+            <Ionicons name="list" size={20} color={"#fff"} />
+          </LinearGradient>
+        </View>
+
+        <View>
+          <Text style={settingStyles.statNumber}>{totalTodos}</Text>
+          <Text style={settingStyles.statLabel}>Total Todos</Text>
+        </View>
+      </LinearGradient>
+
+        {/* completed todos */}
+       <LinearGradient
+        colors={colors.gradients.background}
+        style={[settingStyles.statCard, { borderLeftColor: colors.primary }]}
+      >
+        <View style={settingStyles.statIconContainer}>
+          <LinearGradient
+            colors={colors.gradients.primary}
+            style={settingStyles.statIcon}
+          >
+            <Ionicons name="list" size={20} color={"#fff"} />
+          </LinearGradient>
+        </View>
+
+        <View>
+          <Text style={settingStyles.statNumber}>{completedTodos}</Text>
+          <Text style={settingStyles.statLabel}>Completed Todos</Text>
+        </View>
+      </LinearGradient>
+      </View>
+    </LinearGradient>
+  );
+};
+
+export default ProgressStats;
