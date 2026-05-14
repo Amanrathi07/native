@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import useTheame from "@/hooks/useTheame";
 import { createSettingsStyles } from "@/assets/styles/setting.styles";
 import { LinearGradient } from "expo-linear-gradient";
@@ -9,9 +9,7 @@ import ProgressStats from "@/components/ProgressStats";
 import Preferences from "@/components/Preferences";
 
 const setting = () => {
-  const [isAutoSync, setIsAutoSync] = useState(true);
-  const [isNotificationEnable, setIsNotificationEnable] = useState(true);
-
+ 
   const { colors, isDarkMode, toggleDarkMode } = useTheame();
 
   const settingStyles = createSettingsStyles(colors);
