@@ -6,6 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import ProgressStats from "@/components/ProgressStats";
+import Preferences from "@/components/Preferences";
 
 const setting = () => {
   const [isAutoSync, setIsAutoSync] = useState(true);
@@ -38,6 +39,7 @@ const setting = () => {
           showsVerticalScrollIndicator={false}
         >
           <ProgressStats />
+          <Preferences />
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>

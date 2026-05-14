@@ -28,43 +28,63 @@ const ProgressStats = () => {
       <View style={settingStyles.statsContainer}>
         {/* Total Todos */}
         <LinearGradient
-        colors={colors.gradients.background}
-        style={[settingStyles.statCard, { borderLeftColor: colors.primary }]}
-      >
-        <View style={settingStyles.statIconContainer}>
-          <LinearGradient
-            colors={colors.gradients.primary}
-            style={settingStyles.statIcon}
-          >
-            <Ionicons name="list" size={20} color={"#fff"} />
-          </LinearGradient>
-        </View>
+          colors={colors.gradients.background}
+          style={[settingStyles.statCard, { borderLeftColor: colors.primary }]}
+        >
+          <View style={settingStyles.statIconContainer}>
+            <LinearGradient
+              colors={colors.gradients.primary}
+              style={settingStyles.statIcon}
+            >
+              <Ionicons name="list" size={20} color={"#fff"} />
+            </LinearGradient>
+          </View>
 
-        <View>
-          <Text style={settingStyles.statNumber}>{totalTodos}</Text>
-          <Text style={settingStyles.statLabel}>Total Todos</Text>
-        </View>
-      </LinearGradient>
+          <View>
+            <Text style={settingStyles.statNumber}>{totalTodos}</Text>
+            <Text style={settingStyles.statLabel}>Total Todos</Text>
+          </View>
+        </LinearGradient>
 
         {/* completed todos */}
-       <LinearGradient
-        colors={colors.gradients.background}
-        style={[settingStyles.statCard, { borderLeftColor: colors.primary }]}
-      >
-        <View style={settingStyles.statIconContainer}>
-          <LinearGradient
-            colors={colors.gradients.primary}
-            style={settingStyles.statIcon}
-          >
-            <Ionicons name="list" size={20} color={"#fff"} />
-          </LinearGradient>
-        </View>
+        <LinearGradient
+          colors={colors.gradients.background}
+          style={[settingStyles.statCard, { borderLeftColor: colors.success }]}
+        >
+          <View style={settingStyles.statIconContainer}>
+            <LinearGradient
+              colors={colors.gradients.success}
+              style={settingStyles.statIcon}
+            >
+              <Ionicons name="checkmark-circle" size={20} color={"#fff"} />
+            </LinearGradient>
+          </View>
 
-        <View>
-          <Text style={settingStyles.statNumber}>{completedTodos}</Text>
-          <Text style={settingStyles.statLabel}>Completed Todos</Text>
-        </View>
-      </LinearGradient>
+          <View>
+            <Text style={settingStyles.statNumber}>{completedTodos}</Text>
+            <Text style={settingStyles.statLabel}>Completed</Text>
+          </View>
+        </LinearGradient>
+
+        {/* Active todos */}
+        <LinearGradient
+          colors={colors.gradients.background}
+          style={[settingStyles.statCard, { borderLeftColor: colors.warning }]}
+        >
+          <View style={settingStyles.statIconContainer}>
+            <LinearGradient
+              colors={colors.gradients.warning}
+              style={settingStyles.statIcon}
+            >
+              <Ionicons name="time" size={20} color={"#fff"} />
+            </LinearGradient>
+          </View>
+
+          <View>
+            <Text style={settingStyles.statNumber}>{completedTodos}</Text>
+            <Text style={settingStyles.statLabel}>Active</Text>
+          </View>
+        </LinearGradient>
       </View>
     </LinearGradient>
   );
