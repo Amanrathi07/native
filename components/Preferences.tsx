@@ -26,7 +26,24 @@ const Preferences = () => {
         <Switch 
             value={isDarkMode}
             onValueChange={toggleDarkMode}
-            thumbColor={"#fff"}            
+            thumbColor={"#fff"}    
+            trackColor={{false:colors.border,true:colors.primary}}        
+            />
+      </View>
+
+      {/* notification */}
+      <View style={settingStyles.settingItem}>
+        <View style={settingStyles.settingLeft}>
+            <LinearGradient colors={colors.gradients.warning} style={settingStyles.settingIcon}>
+                <Ionicons name="notifications" size={18} color={"#fff"}/>
+            </LinearGradient>
+            <Text style={settingStyles.settingText}>Notifications</Text>
+        </View>
+        <Switch 
+            value={isNotificationEnable}
+            onValueChange={()=>setIsNotificationEnable(!isNotificationEnable)}
+            thumbColor={"#fff"}    
+            trackColor={{false:colors.border,true:colors.warning}}        
             />
       </View>
     </LinearGradient>
