@@ -1,3 +1,4 @@
+// secure storage is used because AsyncStorage not work with bun 
 import * as AsyncStorage from 'expo-secure-store';
 
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
