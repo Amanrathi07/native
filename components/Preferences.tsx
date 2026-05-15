@@ -57,7 +57,7 @@ const Preferences = () => {
         </View>
         <Switch 
             value={isAutoSync}
-            onValueChange={()=>setIsAutoSync(!isNotificationEnable)}
+            onValueChange={()=>setIsAutoSync(!isAutoSync)}
             thumbColor={"#fff"}    
             trackColor={{false:colors.border,true:colors.success}}        
             />
